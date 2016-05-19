@@ -1,11 +1,14 @@
-package com.example.iraltman.buzr;
+package com.example.iraltman.buzr.rest;
 
 import android.os.AsyncTask;
+
+import com.example.iraltman.buzr.rest.AndrestClient;
+
 import org.json.JSONObject;
 
 import java.util.Map;
 
-class RestRequest extends AsyncTask<Void, JSONObject, JSONObject> {
+public class RestRequest extends AsyncTask<Void, JSONObject, JSONObject> {
     private AndrestClient rest = new AndrestClient();
     private Exception e;
     private String url;

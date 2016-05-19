@@ -1,5 +1,5 @@
 //package com.zackehh.andrest;
-package com.example.iraltman.buzr;
+package com.example.iraltman.buzr.rest;
 
 
 import java.io.BufferedReader;
@@ -41,7 +41,7 @@ import org.json.JSONObject;
  * @author Isaac Whitfield
  * @version 09/03/2014
  */
-public class AndrestClient {
+class AndrestClient {
 
     // The client to use for requests
     DefaultHttpClient client = new DefaultHttpClient();

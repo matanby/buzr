@@ -1,5 +1,5 @@
 //package com.zackehh.andrest;
-package com.example.iraltman.buzr;
+package com.example.iraltman.buzr.rest;
 
 import org.json.JSONObject;
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +63,13 @@ public class DealsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+
+        API api = new API("http://132.65.251.197:8080");
+        deals = api.getDeals(1);
+        for (Deal deal : deals) {
+            Log.i("DEALS", deal.description);
+        }
     }
 
     @Override
@@ -73,12 +81,6 @@ public class DealsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-        API api = new API("http://132.65.251.197:8080");
-        List<Deal> deals = api.getDeals(1);
-        for (Deal deal : deals) {
-            Log.i("DEALS", deal.description);
-        }
 
         super.onViewCreated(view, savedInstanceState);
 

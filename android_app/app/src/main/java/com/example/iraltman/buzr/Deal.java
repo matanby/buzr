@@ -1,6 +1,7 @@
 package com.example.iraltman.buzr;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
@@ -41,7 +42,7 @@ public class Deal {
             this.photoUrl = data_json.getString("photo_url");
             this.startTime = new Date(data_json.getLong("start_time"));
             this.endTime = new Date(data_json.getLong("end_time"));
-        } catch (Exception e) {
+        } catch (JSONException je) {
         }
     }
 }

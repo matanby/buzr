@@ -1,6 +1,7 @@
 package com.example.iraltman.buzr.rest;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.iraltman.buzr.rest.AndrestClient;
 
@@ -12,17 +13,15 @@ public class RestRequest extends AsyncTask<Void, JSONObject, JSONObject> {
     private AndrestClient rest = new AndrestClient();
     private Exception e;
     private String url;
-    private Map<String, Object> data = null;
 
-    public RestRequest(String url, Map<String, Object> data) {
+    public RestRequest(String url) {
         this.url = url;
-        this.data = data;
     }
 
     @Override
     protected JSONObject doInBackground(Void... arg0) {
         try {
-            return rest.request(url, "GET", data); // Do request
+            return rest.request(url, "GET", null); // Do request
         } catch (Exception e) {
             this.e = e; // Store error
         }
@@ -32,11 +31,10 @@ public class RestRequest extends AsyncTask<Void, JSONObject, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject data){
         super.onPostExecute(data);
-        // Display based on error existence
         if(e != null){
-//            new ResponseDialog(context, "We found an error!", e.getMessage()).showDialog();
+            Log.e(getClass().getSimpleName(), e.getMessage());
         } else {
-//            new ResponseDialog(context, "Success!", data.toString()).showDialog();
+            Log.i(getClass().getSimpleName(), "Success: " + this.url);
         }
     }
 }

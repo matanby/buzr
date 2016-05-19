@@ -151,7 +151,9 @@ public class API {
 
     private boolean isOk(JSONObject response) {
         try {
-            return response.getBoolean("success") && response.has("data");
+            return (response != null)
+                    && response.getBoolean("success")
+                    && response.has("data");
         } catch (JSONException e) {
             e.printStackTrace();
             return false;

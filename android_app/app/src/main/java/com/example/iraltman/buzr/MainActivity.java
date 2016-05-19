@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
@@ -60,6 +62,13 @@ public class MainActivity extends AppCompatActivity
         if (! isMyServiceRunning(WifiScanService.class)){
             Intent intent = new Intent(this, WifiScanService.class);
             startService(intent);
+        }
+
+        // Itzik's test code for rest
+        API api = new API("http://132.65.251.197:8080");
+        List<Deal> deals = api.getDeals(1);
+        for (Deal deal : deals) {
+            Log.i("DEALS", deal.description);
         }
     }
 

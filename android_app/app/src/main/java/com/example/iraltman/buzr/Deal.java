@@ -13,6 +13,7 @@ public class Deal {
     public int id;
     public int storeId;
     public String description;
+    public String photoUrl;
     public Date startTime;
     public Date endTime;
 
@@ -21,6 +22,7 @@ public class Deal {
         this.id = 4;
         this.storeId = 5;
         this.description = "Not a big deal.";
+        this.photoUrl = "http://crackberry.com/sites/crackberry.com/files/styles/large/public/topic_images/2013/ANDROID.png?itok=xhm7jaxS";
 
         this.startTime = new Date();
 
@@ -36,6 +38,7 @@ public class Deal {
             this.id = data_json.getInt("id");
             this.storeId = data_json.getInt("store_id");
             this.description = data_json.getString("description");
+            this.photoUrl = data_json.getString("photo_url");
             this.startTime = new Date(data_json.getLong("start_time"));
             this.endTime = new Date(data_json.getLong("end_time"));
         } catch (Exception e) {

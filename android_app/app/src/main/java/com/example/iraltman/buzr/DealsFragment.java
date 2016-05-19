@@ -88,5 +88,6 @@ public class DealsFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.deals);
         listView.setAdapter(adapter);
 
+
     }
 }

@@ -3,11 +3,13 @@ package com.example.iraltman.buzr;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class DealsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private List<Deal> deals;
 
 
     public DealsFragment() {
@@ -60,6 +63,13 @@ public class DealsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+
+        API api = new API("http://132.65.251.197:8080");
+        deals = api.getDeals(1);
+        for (Deal deal : deals) {
+            Log.i("DEALS", deal.description);
+        }
     }
 
     @Override
@@ -71,17 +81,10 @@ public class DealsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        // store -> [deals]
-        List<DealsObj> storeToDeals = new ArrayList<>();
-//        storeToDeals.add("tessst");
-        DealsObj testObj = new DealsObj("name","url");
-        storeToDeals.add(testObj);
 
         super.onViewCreated(view, savedInstanceState);
 
-        DealsAdapter adapter = new DealsAdapter(getActivity(), R.layout.list_view_item, storeToDeals);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, storeToDeals);
-//        adapter.`
+        DealsAdapter adapter = new DealsAdapter(getActivity(), R.layout.list_view_item, deals);
         ListView listView = (ListView) view.findViewById(R.id.deals);
         listView.setAdapter(adapter);
 

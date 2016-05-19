@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_hot_deals"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/hot_deals" />
+            android:icon="@drawable/hot_sale"
+            android:title="@string/hot_deals"
+            />
     </group>
 
     <item android:title="@string/categories">
         <menu>
             <item
                 android:id="@+id/fashion"
-                android:icon="@drawable/food_pink"
+                android:icon="@drawable/fashion_pink"
 
                 android:title="@string/fashion" />
             <item
                 android:id="@+id/shoes"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/shoes_pink"
                 android:title="@string/shoes" />
             <item
                 android:id="@+id/accessories"
-                android:icon="@drawable/ic_accessories_2"
+                android:icon="@drawable/accessories_pink"
                 android:title="@string/accessories" />
             <item
                 android:id="@+id/home_furnishings"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/home_furnisher_pink"
                 android:title="@string/home_furnishings" />
             <item
                 android:id="@+id/beauty_salons_health"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/cosmetic_pink"
                 android:title="@string/beauty_salons_and_health" />
             <item
                 android:id="@+id/electronics"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/electronic_pink"
                 android:title="@string/electronics" />
             <item
                 android:id="@+id/food_and_drinks"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/food_pink"
                 android:title="@string/food_and_drinks" />
             <item
                 android:id="@+id/all_stores"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/all_pink"
                 android:title="@string/all_stores" />
         </menu>
     </item>
@@ -51,7 +52,7 @@
 
         <item
             android:id="@+id/map"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/map_pink"
             android:title="@string/map">
         </item>
     </group>

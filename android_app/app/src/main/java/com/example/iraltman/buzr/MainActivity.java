@@ -3,6 +3,7 @@ package com.example.iraltman.buzr;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +23,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(findViewById(R.id.container) != null){
+            DealsFragment masterFragment = new DealsFragment();
+
+//            masterFragment.setArguments();
+
+            getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +90,23 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_hot_deals) {
-            // Handle the camera action
+            DealsFragment masterFragment = new DealsFragment();
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, masterFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
         } else if (id == R.id.fashion) {
+            StoresFragment fashionFragment = new StoresFragment();
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, fashionFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
 
         } else if (id == R.id.shoes) {
 

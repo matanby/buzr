@@ -17,4 +17,7 @@
     <string name="electronics">Electronics</string>
     <string name="food_and_drinks">Food and Drinks</string>
     <string name="all_stores">ALL STORES</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

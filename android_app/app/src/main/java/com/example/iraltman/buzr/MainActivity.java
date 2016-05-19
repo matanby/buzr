@@ -129,20 +129,84 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.shoes) {
+            StoresFragment shoesFragment = new StoresFragment();
+            shoesFragment.setArguments(3);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, shoesFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.accessories) {
+            StoresFragment accessoriesFragment = new StoresFragment();
+            accessoriesFragment.setArguments(4);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, accessoriesFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.home_furnishings) {
+            StoresFragment home_furnishingsFragment = new StoresFragment();
+            home_furnishingsFragment.setArguments(4);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, home_furnishingsFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.beauty_salons_health) {
+            StoresFragment beauty_salons_healthFragment = new StoresFragment();
+            beauty_salons_healthFragment.setArguments(5);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, beauty_salons_healthFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.electronics) {
+            StoresFragment electronicsFragment = new StoresFragment();
+            electronicsFragment.setArguments(6);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, electronicsFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         }  else if (id == R.id.food_and_drinks) {
+            StoresFragment food_and_drinksFragment = new StoresFragment();
+            food_and_drinksFragment.setArguments(7);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, food_and_drinksFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.all_stores) {
+            StoresFragment all_storesFragment = new StoresFragment();
+            all_storesFragment.setArguments(1);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, all_storesFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         } else if (id == R.id.map) {
+            StoresFragment mapFragment = new StoresFragment();
+            mapFragment.setArguments(20);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, mapFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
         }
 

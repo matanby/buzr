@@ -62,4 +62,7 @@ public class DealsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_deals, container, false);
     }
 
+    public void setArguments(int i) {
+
+    }
 }

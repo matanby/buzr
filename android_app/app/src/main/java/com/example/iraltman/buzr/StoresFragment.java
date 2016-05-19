@@ -62,4 +62,8 @@ public class StoresFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_stores, container, false);
     }
 
+    public void setArguments(int category) {
+//        call DB with the relevant type
+
+    }
 }

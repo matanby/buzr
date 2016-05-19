@@ -12,7 +12,8 @@
         <menu>
             <item
                 android:id="@+id/fashion"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/food_pink"
+
                 android:title="@string/fashion" />
             <item
                 android:id="@+id/shoes"
@@ -20,7 +21,7 @@
                 android:title="@string/shoes" />
             <item
                 android:id="@+id/accessories"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_accessories_2"
                 android:title="@string/accessories" />
             <item
                 android:id="@+id/home_furnishings"

@@ -7,6 +7,7 @@ import android.graphics.DrawFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(findViewById(R.id.container) != null){
+            DealsFragment masterFragment = new DealsFragment();
+
+//            masterFragment.setArguments();
+
+            getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -89,17 +98,40 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_hot_deals) {
+            DealsFragment masterFragment = new DealsFragment();
 
-        } else if (id == R.id.nav_slideshow) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        } else if (id == R.id.nav_manage) {
+            transaction.replace(R.id.container, masterFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.fashion) {
+            StoresFragment fashionFragment = new StoresFragment();
 
-        } else if (id == R.id.nav_send) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.container, fashionFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
+
+        } else if (id == R.id.shoes) {
+
+        } else if (id == R.id.accessories) {
+
+        } else if (id == R.id.home_furnishings) {
+
+        } else if (id == R.id.beauty_salons_health) {
+
+        } else if (id == R.id.electronics) {
+
+        }  else if (id == R.id.food_and_drinks) {
+
+        } else if (id == R.id.all_stores) {
+
+        } else if (id == R.id.map) {
 
         }
 

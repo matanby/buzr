@@ -6,4 +6,18 @@
 
     <string name="action_settings">Settings</string>
     <string name="hello_world_test">Hello World - test!</string>
+    <string name="hot_deals">HOT DEALS</string>
+    <string name="categories">Categories</string>
+    <string name="map">MAP</string>
+    <string name="fashion">Fashion</string>
+    <string name="shoes">Shoes</string>
+    <string name="accessories">Accessories</string>
+    <string name="home_furnishings">Home Furnishings</string>
+    <string name="beauty_salons_and_health">Beauty, Salons and Health</string>
+    <string name="electronics">Electronics</string>
+    <string name="food_and_drinks">Food and Drinks</string>
+    <string name="all_stores">ALL STORES</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

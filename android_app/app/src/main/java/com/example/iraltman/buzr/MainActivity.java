@@ -63,19 +63,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, WifiScanService.class);
             startService(intent);
         }
-
-        // Itzik's test code for rest
-        API api = new API("http://132.65.251.197:8080");
-        List<Deal> deals = api.getDeals(1);
-        for (Deal deal : deals) {
-            Log.i("DEALS", deal.description);
-        }
-        for (Category category : api.getCategories()) {
-            Log.i("CATEGORIES", category.name);
-        }
-        for (Store store : api.getStores()) {
-            Log.i("STORES", store.name);
-        }
     }
 
     @Override
@@ -130,8 +117,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.fashion) {
-            StoresFragment fashionFragment = new StoresFragment();
-            fashionFragment.setArguments(2);
+            CategoryDealsFragment fashionFragment = CategoryDealsFragment.newInstance(2);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -141,8 +127,7 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.shoes) {
-            StoresFragment shoesFragment = new StoresFragment();
-            shoesFragment.setArguments(3);
+            CategoryDealsFragment shoesFragment = CategoryDealsFragment.newInstance(3);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -151,8 +136,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.accessories) {
-            StoresFragment accessoriesFragment = new StoresFragment();
-            accessoriesFragment.setArguments(4);
+            CategoryDealsFragment accessoriesFragment = CategoryDealsFragment.newInstance(4);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -161,8 +145,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.home_furnishings) {
-            StoresFragment home_furnishingsFragment = new StoresFragment();
-            home_furnishingsFragment.setArguments(4);
+            CategoryDealsFragment home_furnishingsFragment = CategoryDealsFragment.newInstance(5);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -171,8 +154,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.beauty_salons_health) {
-            StoresFragment beauty_salons_healthFragment = new StoresFragment();
-            beauty_salons_healthFragment.setArguments(5);
+            CategoryDealsFragment beauty_salons_healthFragment = CategoryDealsFragment.newInstance(6);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -181,8 +163,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.electronics) {
-            StoresFragment electronicsFragment = new StoresFragment();
-            electronicsFragment.setArguments(6);
+            CategoryDealsFragment electronicsFragment = CategoryDealsFragment.newInstance(7);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -191,8 +172,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         }  else if (id == R.id.food_and_drinks) {
-            StoresFragment food_and_drinksFragment = new StoresFragment();
-            food_and_drinksFragment.setArguments(7);
+            CategoryDealsFragment food_and_drinksFragment = CategoryDealsFragment.newInstance(8);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -201,8 +181,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.all_stores) {
-            StoresFragment all_storesFragment = new StoresFragment();
-            all_storesFragment.setArguments(1);
+            DealsFragment all_storesFragment = DealsFragment.newInstance();
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

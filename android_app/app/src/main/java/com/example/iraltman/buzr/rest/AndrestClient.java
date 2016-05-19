@@ -15,10 +15,10 @@ import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -92,9 +92,9 @@ class AndrestClient {
     /**
      * Calls a POST request on a given url. Takes a data object in the form of a HashMap to POST.
      *
-     * @param url the url you wish to connect to
+     * @param url  the url you wish to connect to
+     * @param data the data object to post to the url
      * @return JSON    the JSON response from the call
-     * @param    data    the data object to post to the url
      */
     public JSONObject post(String url, Map<String, Object> data) throws RESTException {
         HttpPost request = new HttpPost(url);
@@ -117,9 +117,9 @@ class AndrestClient {
     /**
      * Calls a PUT request on a given url. Takes a data object in the form of a HashMap to PUT.
      *
-     * @param url the url you wish to connect to
+     * @param url  the url you wish to connect to
+     * @param data the data object to post to the url
      * @return JSON    the JSON response from the call
-     * @param    data    the data object to post to the url
      */
     public JSONObject put(String url, Map<String, Object> data) throws RESTException {
         HttpPut request = new HttpPut(url);

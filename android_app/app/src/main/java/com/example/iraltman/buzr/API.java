@@ -92,6 +92,7 @@ public class API {
     }
 
     private String buildUrl(String path) {
+//        "http://" +
         return this.baseUrl + path;
     }
 }

@@ -9,11 +9,13 @@ import org.json.JSONObject;
 public class Category {
     public int id;
     public String name;
+    public String iconUrl;
 
     // Mock
     public Category() {
         this.id = 2;
         this.name = "Shoes";
+        this.iconUrl = "http://webneel.com/sites/default/files/images/manual/logo-restaurant/best-restaurant-logo-design%20(2).gif";
     }
 
     // Real
@@ -21,6 +23,7 @@ public class Category {
         try {
             this.id = data_json.getInt("id");
             this.name = data_json.getString("name");
+            this.iconUrl = data_json.getString("icon_url");
         } catch (JSONException je) {
         }
     }

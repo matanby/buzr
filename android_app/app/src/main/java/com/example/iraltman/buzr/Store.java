@@ -11,6 +11,8 @@ public class Store {
     public String name;
     public String address;
     public String locationId;
+    public String logoUrl;
+    public String photoUrl;
     public int categoryId;
 
     // Mock
@@ -18,7 +20,9 @@ public class Store {
         this.id = 100;
         this.name = "Castro Shoes";
         this.address = "Fifth Floor";
-        this.locationId = "";
+        this.locationId = "18047hn";
+        this.logoUrl = "http://www.fashionmagazine.com/wp-content/themes/sjm-bones-fashion/library/images/fashion-gfx_brand-black.svg";
+        this.photoUrl = "http://webneel.com/sites/default/files/images/manual/logo-restaurant/best-restaurant-logo-design%20(2).gif";
         this.categoryId = 2;
     }
 
@@ -29,6 +33,8 @@ public class Store {
             this.name = data_json.getString("name");
             this.address = data_json.getString("address");
             this.locationId = data_json.getString("location_id");
+            this.logoUrl = data_json.getString("logo_url");
+            this.photoUrl = data_json.getString("photo_url");
             this.categoryId = data_json.getInt("category_id");
         } catch (JSONException je) {
         }

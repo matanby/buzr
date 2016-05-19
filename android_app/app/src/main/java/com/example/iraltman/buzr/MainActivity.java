@@ -70,6 +70,12 @@ public class MainActivity extends AppCompatActivity
         for (Deal deal : deals) {
             Log.i("DEALS", deal.description);
         }
+        for (Category category : api.getCategories()) {
+            Log.i("CATEGORIES", category.name);
+        }
+        for (Store store : api.getStores()) {
+            Log.i("STORES", store.name);
+        }
     }
 
     @Override

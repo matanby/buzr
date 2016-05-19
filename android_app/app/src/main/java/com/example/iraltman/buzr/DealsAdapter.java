@@ -13,10 +13,10 @@ import java.util.List;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
-public class DealsAdapter extends ArrayAdapter<DealsObj> {
+public class DealsAdapter extends ArrayAdapter<Deal> {
 
 
-    public DealsAdapter(Context context, int resource, List<DealsObj> objects) {
+    public DealsAdapter(Context context, int resource, List<Deal> objects) {
         super(context, resource, objects);
     }
 
@@ -27,7 +27,7 @@ public class DealsAdapter extends ArrayAdapter<DealsObj> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view_item, parent, false);
         }
 
-        String url = getItem(position).deal_url;
+        String url = getItem(position).photoUrl;
         ImageView imageView = (ImageView) convertView.findViewById(R.id.deal_img);
         Picasso.with(getContext()).load(url).into(imageView);
 

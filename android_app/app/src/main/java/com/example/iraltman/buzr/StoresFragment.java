@@ -2,10 +2,16 @@ package com.example.iraltman.buzr;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListView;
+
+import java.util.List;
 
 
 /**
@@ -22,7 +28,7 @@ public class StoresFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private List<Deal> deals;
 
     public StoresFragment() {
         // Required empty public constructor
@@ -62,8 +68,25 @@ public class StoresFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_stores, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+
+        DealsAdapter adapter = new DealsAdapter(getActivity(), R.layout.list_view_item, deals);
+        //ListView listView = (ListView) view.findViewById(R.id.deals);
+        //listView.setAdapter(adapter);
+
+        GridView gridView = (GridView) view.findViewById(R.id.stores);
+        gridView.setAdapter(adapter);
+    }
+
     public void setArguments(int category) {
 //        call DB with the relevant type
-
+        API api = new API("http://132.65.251.197:8080");
+        deals = api.getDeals(category);
+        for (Deal deal : deals) {
+            Log.i("DEALS", deal.description);
+        }
     }
 }

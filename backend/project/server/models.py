@@ -36,9 +36,9 @@ class Store(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), unique=True, nullable=False)
-    address = db.Column(db.String(255), unique=True, nullable=False)
-    location_id = db.Column(db.String, db.ForeignKey(Location.id), unique=True, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey(Category.id), unique=True, nullable=False)
+    address = db.Column(db.String(255), unique=False, nullable=False)
+    location_id = db.Column(db.String, db.ForeignKey(Location.id), unique=False, nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(Category.id), unique=False, nullable=False)
     logo_url = db.Column(db.String, unique=False, nullable=False)
     photo_url = db.Column(db.String, unique=False, nullable=False)
 
@@ -62,7 +62,7 @@ class Deal(db.Model):
     __tablename__ = "deals"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    store_id = db.Column(db.Integer, db.ForeignKey(Store.id), unique=True, nullable=False)
+    store_id = db.Column(db.Integer, db.ForeignKey(Store.id), unique=False, nullable=False)
     description = db.Column(db.String(255), unique=False, nullable=False)
     start_time = db.Column(db.INTEGER, unique=False, nullable=False)
     end_time = db.Column(db.INTEGER, unique=False, nullable=False)

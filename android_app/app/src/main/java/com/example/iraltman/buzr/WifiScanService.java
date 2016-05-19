@@ -1,10 +1,7 @@
 package com.example.iraltman.buzr;
 
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,19 +12,19 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WifiScanService extends Service {
-    private static final int MIN_RSSI_LEVEL = 8;
-    private static final String SSID_PREFIX = "buzr";
+    private static final int MIX_PROXIMITY_LEVEL = 8;
+    private static final String SSID_PREFIX = "Buzr";
     private static long UPDATE_INTERVAL = 5 * 1000;
     private static Timer timer = new Timer();
+    private static API api = new API("http://132.65.251.197:8080");
 
     WifiManager wifi;
-    WifiScanReceiver wifiReciever;
+    WifiScanReceiver wifiReceiver;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,11 +38,10 @@ public class WifiScanService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("LocalService", "Received start id " + startId + ": " + intent);
+        Log.i(getClass().getSimpleName(), "Received start id " + startId + ": " + intent);
         _startService();
 
-        // We want this service to continue running until it is explicitly
-        // stopped, so return sticky.
+        // We want this service to continue running until it is explicitly stopped, so return sticky.
         return START_STICKY;
     }
 
@@ -55,34 +51,29 @@ public class WifiScanService extends Service {
                     public void run() {
                         doServiceWork();
                     }
-                }, 1000,UPDATE_INTERVAL);
-        Log.i(getClass().getSimpleName(), "FileScannerService Timer started....");
+                }, 1000, UPDATE_INTERVAL);
 
+        Log.i(getClass().getSimpleName(), "Wifi networks scan timer started");
         wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
-        wifiReciever = new WifiScanReceiver();
-        registerReceiver(wifiReciever, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        wifiReceiver = new WifiScanReceiver();
+        registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
     }
 
     private void doServiceWork()
     {
-        //do something wotever you want
-        //like reading file or getting data from network
-
         try {
-            Log.i(getClass().getSimpleName(), "Wotever");
+            Log.i(getClass().getSimpleName(), "Starting Wifi networks scan...");
             wifi.startScan();
         }
         catch (Exception e) {
             Log.e(getClass().getSimpleName(), e.toString());
-
         }
-
     }
 
     private void _shutdownService()
     {
         if (timer != null) timer.cancel();
-        Log.i(getClass().getSimpleName(), "Timer stopped...");
+        Log.i(getClass().getSimpleName(), "Wifi networks scan timer stopped...");
     }
 
     @Override
@@ -90,37 +81,44 @@ public class WifiScanService extends Service {
     {
         super.onDestroy();
         _shutdownService();
-
-        // if (MAIN_ACTIVITY != null)  Log.d(getClass().getSimpleName(), "FileScannerService stopped");
+        // if (MAIN_ACTIVITY != null)
+        //     Log.d(getClass().getSimpleName(), "FileScannerService stopped");
     }
 
     private class WifiScanReceiver extends BroadcastReceiver {
         public void onReceive(Context c, Intent intent) {
-            Log.i(getClass().getSimpleName(), "WHAZAAAA");
-
             List<ScanResult> wifiScanList = wifi.getScanResults();
+            Log.i(getClass().getSimpleName(), String.format("Received Wifi scan results containing %1$d networks", wifiScanList.size()));
+
             for (ScanResult scan : wifiScanList) {
-                if (WifiManager.calculateSignalLevel(scan.level, 10) >= MIN_RSSI_LEVEL) {
+                if (WifiManager.calculateSignalLevel(scan.level, 10) >= MIX_PROXIMITY_LEVEL) {
                     if (scan.SSID.startsWith(SSID_PREFIX)) {
-                        Log.i(getClass().getSimpleName(), scan.SSID);
+                        Log.i(getClass().getSimpleName(), "Found a Buzr network - " + scan.SSID);
+                        String locationId = scan.SSID.substring(SSID_PREFIX.length()).trim();
+                        List<Deal> deals = api.getNearbyDeals(locationId);
+                        Log.i(getClass().getSimpleName(), "Fetched information about " + deals.size() + " nearby deals");
+//                        for(Deal d: deals){
+//                            Log.i(getClass().getSimpleName(), d.toString());
+//                        }
+                        displayNearbyDealsNotification(deals.size(), c);
                     }
                 }
-
             }
 
-            for(ScanResult sr : wifiScanList) {
-                Log.i(getClass().getSimpleName(), sr.toString());
-            }
+//            for(ScanResult sr : wifiScanList) {
+//                Log.i(getClass().getSimpleName(), sr.toString());
+//            }
+        }
 
-
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(c)
-                            .setSmallIcon(R.drawable.ic_menu_camera)
-                            .setContentTitle("Buzr")
-                            .setContentText("Hello World!");
+        void displayNearbyDealsNotification(int nearbyDealsCount, Context context){
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.ic_menu_camera)
+                    .setContentTitle("Buzr")
+                    .setContentText(String.format("There are %1$d hot deals around you!", nearbyDealsCount));
 
             NotificationManager mNotificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
             // mId allows you to update the notification later on.
             mNotificationManager.notify(0, mBuilder.build());
         }

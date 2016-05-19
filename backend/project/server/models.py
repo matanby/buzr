@@ -67,6 +67,7 @@ class Deal(db.Model):
     start_time = db.Column(db.INTEGER, unique=False, nullable=False)
     end_time = db.Column(db.INTEGER, unique=False, nullable=False)
     photo_url = db.Column(db.String, unique=False, nullable=False)
+    large_photo_url = db.Column(db.String, unique=False, nullable=False)
 
     store = db.relationship('Store')
 

@@ -18,6 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         if(findViewById(R.id.container) != null){
             DealsFragment masterFragment = new DealsFragment();
 
-//            masterFragment.setArguments();
+            masterFragment.setArguments(0);
 
             getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
         }
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.fashion) {
             StoresFragment fashionFragment = new StoresFragment();
+            fashionFragment.setArguments(2);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

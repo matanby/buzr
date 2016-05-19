@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.iraltman.buzr.StoresFragment"
-    android:background="#00ff00">
+    android:background="#00ff00"
+    android:elevation="0dp">
 
-    <GridView
+    <ListView
         android:id="@+id/stores"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-    </GridView>
+    </ListView>
 
 </FrameLayout>

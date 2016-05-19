@@ -22,7 +22,6 @@ public class DealsAdapter extends ArrayAdapter<Deal> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        DealsObj deal = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view_item, parent, false);
         }

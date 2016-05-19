@@ -74,11 +74,14 @@ public class StoresFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         DealsAdapter adapter = new DealsAdapter(getActivity(), R.layout.list_view_item, deals);
-        //ListView listView = (ListView) view.findViewById(R.id.deals);
-        //listView.setAdapter(adapter);
+//        ListView listView = (ListView) view.findViewById(R.id.deals);
+//        listView.setAdapter(adapter);
 
-        GridView gridView = (GridView) view.findViewById(R.id.stores);
-        gridView.setAdapter(adapter);
+        ListView listView = (ListView) view.findViewById(R.id.stores);
+        listView.setAdapter(adapter);
+
+//        GridView gridView = (GridView) view.findViewById(R.id.stores);
+//        gridView.setAdapter(adapter);
     }
 
     public void setArguments(int category) {

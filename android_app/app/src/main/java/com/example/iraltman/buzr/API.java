@@ -20,6 +20,10 @@ public class API {
         this.baseUrl = baseUrl;
     }
 
+    public String buildUrl(String path) {
+        return this.baseUrl + path;
+    }
+
     public List<Category> getCategories() {
         final String url = this.buildUrl("/api/categories");
         List<Category> categories = new LinkedList<>();
@@ -158,9 +162,5 @@ public class API {
             e.printStackTrace();
             return false;
         }
-    }
-
-    private String buildUrl(String path) {
-        return this.baseUrl + path;
     }
 }

@@ -86,7 +86,7 @@ public class StoresFragment extends Fragment {
 
     public void setArguments(int category) {
 //        call DB with the relevant type
-        API api = new API("http://132.65.251.197:8080");
+        API api = new API(getResources().getString(R.string.endpoint));
         deals = api.getDeals(category);
         for (Deal deal : deals) {
             Log.i("DEALS", deal.description);

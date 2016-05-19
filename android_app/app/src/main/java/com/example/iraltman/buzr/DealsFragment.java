@@ -1,11 +1,18 @@
 package com.example.iraltman.buzr;
 
-
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -62,7 +69,21 @@ public class DealsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_deals, container, false);
     }
 
-    public void setArguments(int i) {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // store -> [deals]
+        List<DealsObj> storeToDeals = new ArrayList<>();
+//        storeToDeals.add("tessst");
+        DealsObj testObj = new DealsObj("name","url");
+        storeToDeals.add(testObj);
+
+        super.onViewCreated(view, savedInstanceState);
+
+        DealsAdapter adapter = new DealsAdapter(getActivity(), R.layout.list_view_item, storeToDeals);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, storeToDeals);
+//        adapter.`
+        ListView listView = (ListView) view.findViewById(R.id.deals);
+        listView.setAdapter(adapter);
 
     }
 }

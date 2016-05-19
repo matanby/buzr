@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity
         if(findViewById(R.id.container) != null){
             DealsFragment masterFragment = new DealsFragment();
 
-            masterFragment.setArguments(0);
-
             getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
         }
 

@@ -46,8 +46,20 @@ def stores():
     return jsonify(response), 200
 
 
+@api.route('/deals')
+def deals():
+    deals = models.Deal.query.filter(models.Deal.start_time > time.time()).all()
+    response = {
+        'status': 200,
+        'success': True,
+        'data': [d.json for d in deals]
+    }
+
+    return jsonify(response), 200
+
+
 @api.route('/deals/<int:category_id>')
-def deals(category_id):
+def deals_by_category(category_id):
     deals = models.Deal.query.filter(models.Deal.start_time > time.time()).all()
     filtered_deals = filter(lambda deal: deal.store.category_id == category_id, deals)
     response = {

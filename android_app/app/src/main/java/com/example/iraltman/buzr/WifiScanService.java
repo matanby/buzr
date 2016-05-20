@@ -91,20 +91,22 @@ public class WifiScanService extends Service {
             List<ScanResult> wifiScanList = wifi.getScanResults();
             Log.i(getClass().getSimpleName(), String.format("Received Wifi scan results containing %1$d networks", wifiScanList.size()));
 
+            String locationId = null;
             for (ScanResult scan : wifiScanList) {
                 if (WifiManager.calculateSignalLevel(scan.level, 10) >= MIX_PROXIMITY_LEVEL) {
                     if (scan.SSID.startsWith(SSID_PREFIX)) {
                         Log.i(getClass().getSimpleName(), "Found a Buzr network - " + scan.SSID);
-                        String locationId = scan.SSID.substring(SSID_PREFIX.length()).trim();
-                        List<Deal> deals = api.getNearbyDeals(locationId);
-                        Log.i(getClass().getSimpleName(), "Fetched information about " + deals.size() + " nearby deals");
-//                        for(Deal d: deals){
-//                            Log.i(getClass().getSimpleName(), d.toString());
-//                        }
-                        displayNearbyDealsNotification(deals.size(), locationId, c);
+                        locationId = scan.SSID.substring(SSID_PREFIX.length()).trim();
+                        break;
                     }
                 }
             }
+            if (locationId != null) {
+                List<Deal> deals = api.getNearbyDeals(locationId);
+                Log.i(getClass().getSimpleName(), "Fetched information about " + deals.size() + " nearby deals");
+                displayNearbyDealsNotification(deals.size(), locationId, c);
+            }
+            sendBroadcastMessage("LocationId", locationId);
 
 //            for(ScanResult sr : wifiScanList) {
 //                Log.i(getClass().getSimpleName(), sr.toString());
@@ -130,6 +132,12 @@ public class WifiScanService extends Service {
 
             // mId allows you to update the notification later on.
             mNotificationManager.notify(0, mBuilder.build());
+        }
+
+        private void sendBroadcastMessage(String intentFilterName, String locationId) {
+            Intent intent = new Intent(intentFilterName);
+            intent.putExtra("location_id", locationId);
+            sendBroadcast(intent);
         }
     }
 }

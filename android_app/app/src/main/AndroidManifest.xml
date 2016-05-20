@@ -31,12 +31,18 @@
             android:exported="true" />
 
         <!-- Declaring broadcast receiver for BOOT_COMPLETED event. -->
-        <receiver android:name=".BootReceiver" android:enabled="true" android:exported="false">
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name=".LocationReceiver"
+            android:enabled="true"
+            android:exported="false"></receiver>
     </application>
 
 </manifest>

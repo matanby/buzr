@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
             DealsFragment masterFragment = new DealsFragment();
 
             getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
-            activeId = 0;
+            activeId = R.id.nav_hot_deals;
         }
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity
             public void onReceive(Context context, Intent intent) {
                 Log.i("MainActivity", "Setting locationId: " + parentActivity.locationId);
                 parentActivity.locationId = intent.getStringExtra("location_id");
-                if (parentActivity.activeId == 0) {
+                if (parentActivity.activeId == R.id.nav_hot_deals) {
                     parentActivity.refreshHotDeals();
                 }
             }

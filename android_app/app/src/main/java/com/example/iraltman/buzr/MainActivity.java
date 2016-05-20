@@ -24,10 +24,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ImageView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import it.sephiroth.android.library.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -213,6 +216,7 @@ public class MainActivity extends AppCompatActivity
             activeId = R.id.food_and_drinks;
 
         } else if (id == R.id.all_stores) {
+
             CategoryDealsFragment all_storesFragment = CategoryDealsFragment.newInstance(1, R.string.all_stores);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -223,15 +227,18 @@ public class MainActivity extends AppCompatActivity
             activeId = R.id.all_stores;
 
         } else if (id == R.id.map) {
-            MapFragment mapFragment = new MapFragment();
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            if (false && this.locationId != null) {
 
-            transaction.replace(R.id.container, mapFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-            activeId = R.id.map;
+                MapFragment mapFragment = new MapFragment();
+                mapFragment.setArguments("23da54d6");
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+                transaction.replace(R.id.container, mapFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                activeId = R.id.map;
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

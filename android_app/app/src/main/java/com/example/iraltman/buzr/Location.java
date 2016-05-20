@@ -14,7 +14,7 @@ public class Location {
         try {
             this.id = data_json.getString("id");
             this.description = data_json.getString("description");
-            this.mapURL = R.string.endpoint + data_json.getString("map_photo_url");
+            this.mapURL = "http://132.65.251.197:8080" + data_json.getString("map_photo_url");
         } catch (JSONException je) {
         }
     }

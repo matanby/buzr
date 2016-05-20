@@ -46,11 +46,8 @@ public class DealsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
 
-        API api = new API("http://132.65.251.197:8080");
+        API api = new API(getResources().getString(R.string.endpoint));
         deals = api.getDeals(1);
-        for (Deal deal : deals) {
-            Log.i("DEALS", deal.description);
-        }
     }
 
     @Override
@@ -69,6 +66,6 @@ public class DealsFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.deals);
         listView.setAdapter(adapter);
 
-
+        getActivity().setTitle(R.string.all_stores);
     }
 }

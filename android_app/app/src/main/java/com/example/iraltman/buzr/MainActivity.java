@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
             DealsFragment masterFragment = new DealsFragment();
 
             getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
-            activeId = 0;
+            activeId = R.id.nav_hot_deals;
         }
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -256,9 +256,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.i("MainActivity", "Setting locationId: " + parentActivity.locationId);
-                parentActivity.locationId = intent.getStringExtra("location_id");
-                if (parentActivity.activeId == 0) {
-                    parentActivity.refreshHotDeals();
+                String newLocationId = intent.getStringExtra("location_id");
+                if ((newLocationId == null || parentActivity.locationId == null)
+                        || (! newLocationId.equals(parentActivity.locationId))){
+                    parentActivity.locationId = intent.getStringExtra("location_id");
+                    if (parentActivity.activeId == R.id.nav_hot_deals) {
+                        parentActivity.refreshHotDeals();
+                    }
                 }
             }
         };
@@ -267,13 +271,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void refreshHotDeals() {
-        DealsFragment masterFragment = new DealsFragment();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.container, masterFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-        activeId = R.id.nav_hot_deals;
+        try{
+            DealsFragment masterFragment = new DealsFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, masterFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            activeId = R.id.nav_hot_deals;
+        }
+        catch (Exception e){
+            return;
+        }
     }
 }

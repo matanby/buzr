@@ -6,12 +6,14 @@ class Location(db.Model):
 
     id = db.Column(db.String(255), primary_key=True)
     description = db.Column(db.String(255), unique=False, nullable=False)
+    map_photo_url = db.Column(db.String(255), unique=False, nullable=True)
 
     @property
     def json(self):
         return {
             'id': self.id,
             'description': self.description,
+            'map_photo_url': self.map_photo_url,
         }
 
 

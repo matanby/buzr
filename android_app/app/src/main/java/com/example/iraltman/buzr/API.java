@@ -153,6 +153,31 @@ public class API {
         return deals;
     }
 
+    public Location getLocation(String locationId){
+        final String url = this.buildUrl("/api/location/" + locationId);
+        JSONObject deals_json;
+        try {
+            deals_json = new RestRequest(url).execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;   // empty
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return null;   // empty
+        }
+        if (! isOk(deals_json)) {
+            return null;   // empty
+        }
+
+        try {
+            JSONObject location_data = deals_json.getJSONObject(("data"));
+            return new Location(location_data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private boolean isOk(JSONObject response) {
         try {
             return (response != null)

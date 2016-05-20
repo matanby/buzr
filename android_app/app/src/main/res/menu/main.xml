@@ -5,7 +5,7 @@
         android:id="@+id/action_favorite"
         android:orderInCategory="1"
         android:title="@string/favorite"
-        android:icon="@drawable/favorit_yellow"
+        android:icon="@drawable/favorit_dark"
         app:showAsAction="always" />
 
     <item

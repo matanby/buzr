@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        if(b != null && b.getString("locationId") != null){
+            String locationId = b.getString("locationId");
+            Log.i("Whos dat?!?!", locationId);
+        }
+
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

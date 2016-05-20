@@ -1,6 +1,7 @@
 package com.example.iraltman.buzr;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -100,7 +101,7 @@ public class WifiScanService extends Service {
 //                        for(Deal d: deals){
 //                            Log.i(getClass().getSimpleName(), d.toString());
 //                        }
-                        displayNearbyDealsNotification(deals.size(), c);
+                        displayNearbyDealsNotification(deals.size(), locationId, c);
                     }
                 }
             }
@@ -110,11 +111,19 @@ public class WifiScanService extends Service {
 //            }
         }
 
-        void displayNearbyDealsNotification(int nearbyDealsCount, Context context){
+        void displayNearbyDealsNotification(int nearbyDealsCount, String locationId, Context context){
+            Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
+            notificationIntent.putExtra("locationId", locationId);
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.ic_menu_camera)
+                    .setSmallIcon(R.drawable.deals_notification)
                     .setContentTitle("Buzr")
-                    .setContentText(String.format("There are %1$d hot deals around you!", nearbyDealsCount));
+                    .setContentText(String.format("There are %1$d hot deals around you!", nearbyDealsCount))
+                    .setAutoCancel(true);
+
+            mBuilder.setContentIntent(contentIntent);
 
             NotificationManager mNotificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

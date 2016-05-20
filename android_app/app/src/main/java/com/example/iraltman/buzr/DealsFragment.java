@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,14 @@ public class DealsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
 
-        API api = new API(getResources().getString(R.string.endpoint));
-        deals = api.getDeals(1);
+        API api = new API(getString(R.string.endpoint));
+        MainActivity parentActivity = (MainActivity) getActivity();
+        Log.i("Deals", "Current locationId: " + parentActivity.locationId);
+        if (parentActivity.locationId != null) {
+            deals = api.getNearbyDeals(parentActivity.locationId);
+        } else {
+            deals = new LinkedList<>();
+        }
     }
 
     @Override
@@ -66,6 +73,6 @@ public class DealsFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.deals);
         listView.setAdapter(adapter);
 
-        getActivity().setTitle(R.string.all_stores);
+        getActivity().setTitle(R.string.hot_deals);
     }
 }

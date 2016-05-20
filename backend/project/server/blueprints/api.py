@@ -22,6 +22,19 @@ api = Blueprint('user', __name__, )
 #### routes ####
 ################
 
+
+@api.route('/location/<string:location_id>')
+def location(location_id):
+    location = models.Location.query.filter(models.Location.id == location_id).first()
+    response = {
+        'status': 200,
+        'success': True,
+        'data': location.json if location else None
+    }
+
+    return jsonify(response), 200
+
+
 @api.route('/categories')
 def categories():
     categories = models.Category.query.all()

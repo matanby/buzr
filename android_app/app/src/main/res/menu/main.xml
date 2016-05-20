@@ -12,6 +12,6 @@
         android:id="@+id/action_shop"
         android:orderInCategory="2"
         android:title="@string/shopping"
-        android:icon="@drawable/shopping_dark"
+        android:icon="@drawable/checkout"
         app:showAsAction="always" />
 </menu>

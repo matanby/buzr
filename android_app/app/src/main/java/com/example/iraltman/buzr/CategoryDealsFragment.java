@@ -22,8 +22,10 @@ import java.util.List;
 public class CategoryDealsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String CATEGORY_ID = "category_id";
+    private static final String CATEGORY_TITLE = "category_title";
 
     private int categoryId;
+    private String categoryTitle;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -39,10 +41,11 @@ public class CategoryDealsFragment extends Fragment {
      *
      * @return A new instance of fragment CategoryDealsFragment.
      */
-    public static CategoryDealsFragment newInstance(int categoryId) {
+    public static CategoryDealsFragment newInstance(int categoryId, int categoryTitleId) {
         CategoryDealsFragment fragment = new CategoryDealsFragment();
         Bundle args = new Bundle();
         args.putInt(CATEGORY_ID, categoryId);
+        args.putInt(CATEGORY_TITLE, categoryTitleId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,9 +53,10 @@ public class CategoryDealsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        API api = new API("http://132.65.251.197:8080");
+        API api = new API(getResources().getString(R.string.endpoint));
         if (getArguments() != null) {
             categoryId = getArguments().getInt(CATEGORY_ID);
+            categoryTitle = getString(getArguments().getInt(CATEGORY_TITLE));
 
             deals = api.getDeals(categoryId);
         } else {
@@ -74,5 +78,7 @@ public class CategoryDealsFragment extends Fragment {
         DealsAdapter adapter = new DealsAdapter(getActivity(), R.layout.list_view_item, deals);
         ListView listView = (ListView) view.findViewById(R.id.deals);
         listView.setAdapter(adapter);
+
+        getActivity().setTitle(this.categoryTitle);
     }
 }

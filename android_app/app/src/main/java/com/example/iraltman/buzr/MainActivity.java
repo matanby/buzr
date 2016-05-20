@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.fashion) {
-            CategoryDealsFragment fashionFragment = CategoryDealsFragment.newInstance(2);
+            CategoryDealsFragment fashionFragment = CategoryDealsFragment.newInstance(2, R.string.fashion);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.shoes) {
-            CategoryDealsFragment shoesFragment = CategoryDealsFragment.newInstance(3);
+            CategoryDealsFragment shoesFragment = CategoryDealsFragment.newInstance(3, R.string.shoes);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.accessories) {
-            CategoryDealsFragment accessoriesFragment = CategoryDealsFragment.newInstance(4);
+            CategoryDealsFragment accessoriesFragment = CategoryDealsFragment.newInstance(4, R.string.accessories);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.home_furnishings) {
-            CategoryDealsFragment home_furnishingsFragment = CategoryDealsFragment.newInstance(5);
+            CategoryDealsFragment home_furnishingsFragment = CategoryDealsFragment.newInstance(5, R.string.home_furnishings);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.beauty_salons_health) {
-            CategoryDealsFragment beauty_salons_healthFragment = CategoryDealsFragment.newInstance(6);
+            CategoryDealsFragment beauty_salons_healthFragment = CategoryDealsFragment.newInstance(6, R.string.beauty_salons_and_health);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.electronics) {
-            CategoryDealsFragment electronicsFragment = CategoryDealsFragment.newInstance(7);
+            CategoryDealsFragment electronicsFragment = CategoryDealsFragment.newInstance(7, R.string.electronics);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         }  else if (id == R.id.food_and_drinks) {
-            CategoryDealsFragment food_and_drinksFragment = CategoryDealsFragment.newInstance(8);
+            CategoryDealsFragment food_and_drinksFragment = CategoryDealsFragment.newInstance(8, R.id.food_and_drinks);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

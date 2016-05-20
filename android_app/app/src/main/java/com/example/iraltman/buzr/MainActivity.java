@@ -205,8 +205,7 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
         } else if (id == R.id.map) {
-            StoresFragment mapFragment = new StoresFragment();
-            mapFragment.setArguments(20);
+            MapFragment mapFragment = new MapFragment();
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

@@ -118,7 +118,7 @@ public class WifiScanService extends Service {
             PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.deals_notification)
+                    .setSmallIcon(R.drawable.ic_deals_notification)
                     .setContentTitle("Buzr")
                     .setContentText(String.format("There are %1$d hot deals around you!", nearbyDealsCount))
                     .setAutoCancel(true);

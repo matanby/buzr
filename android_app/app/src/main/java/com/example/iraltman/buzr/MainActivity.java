@@ -2,8 +2,10 @@ package com.example.iraltman.buzr;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.DrawFilter;
 import android.graphics.drawable.ColorDrawable;
@@ -30,6 +32,11 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private int activeId;
+
+    private BroadcastReceiver locationReceiver;
+    public String locationId = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity
             DealsFragment masterFragment = new DealsFragment();
 
             getSupportFragmentManager().beginTransaction().add(R.id.container, masterFragment).commit();
+            activeId = 0;
         }
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -74,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
+        registerBroadcastReceivers();
         if (! isMyServiceRunning(WifiScanService.class)){
             Intent intent = new Intent(this, WifiScanService.class);
             startService(intent);
@@ -130,6 +139,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, masterFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.nav_hot_deals;
 
         } else if (id == R.id.fashion) {
             CategoryDealsFragment fashionFragment = CategoryDealsFragment.newInstance(2, R.string.fashion);
@@ -139,6 +149,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, fashionFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.fashion;
 
 
         } else if (id == R.id.shoes) {
@@ -149,6 +160,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, shoesFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.shoes;
 
         } else if (id == R.id.accessories) {
             CategoryDealsFragment accessoriesFragment = CategoryDealsFragment.newInstance(4, R.string.accessories);
@@ -158,6 +170,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, accessoriesFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.accessories;
 
         } else if (id == R.id.home_furnishings) {
             CategoryDealsFragment home_furnishingsFragment = CategoryDealsFragment.newInstance(5, R.string.home_furnishings);
@@ -167,6 +180,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, home_furnishingsFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.home_furnishings;
 
         } else if (id == R.id.beauty_salons_health) {
             CategoryDealsFragment beauty_salons_healthFragment = CategoryDealsFragment.newInstance(6, R.string.beauty_salons_and_health);
@@ -176,6 +190,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, beauty_salons_healthFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.beauty_salons_health;
 
         } else if (id == R.id.electronics) {
             CategoryDealsFragment electronicsFragment = CategoryDealsFragment.newInstance(7, R.string.electronics);
@@ -185,24 +200,27 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, electronicsFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.electronics;
 
         }  else if (id == R.id.food_and_drinks) {
-            CategoryDealsFragment food_and_drinksFragment = CategoryDealsFragment.newInstance(8, R.id.food_and_drinks);
+            CategoryDealsFragment food_and_drinksFragment = CategoryDealsFragment.newInstance(8, R.string.food_and_drinks);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             transaction.replace(R.id.container, food_and_drinksFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.food_and_drinks;
 
         } else if (id == R.id.all_stores) {
-            DealsFragment all_storesFragment = DealsFragment.newInstance();
+            CategoryDealsFragment all_storesFragment = CategoryDealsFragment.newInstance(1, R.string.all_stores);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             transaction.replace(R.id.container, all_storesFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.all_stores;
 
         } else if (id == R.id.map) {
             StoresFragment mapFragment = new StoresFragment();
@@ -213,6 +231,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container, mapFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            activeId = R.id.map;
 
         }
 
@@ -229,5 +248,32 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return false;
+    }
+
+    private void registerBroadcastReceivers() {
+        final MainActivity parentActivity = this;
+        this.locationReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.i("MainActivity", "Setting locationId: " + parentActivity.locationId);
+                parentActivity.locationId = intent.getStringExtra("location_id");
+                if (parentActivity.activeId == 0) {
+                    parentActivity.refreshHotDeals();
+                }
+            }
+        };
+        IntentFilter locationFilter = new IntentFilter("LocationId");
+        registerReceiver(this.locationReceiver, locationFilter);
+    }
+
+    private void refreshHotDeals() {
+        DealsFragment masterFragment = new DealsFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.container, masterFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        activeId = R.id.nav_hot_deals;
     }
 }
